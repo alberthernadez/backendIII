@@ -1,16 +1,23 @@
-import express from "express";
-import usersRouter from "./src/routes/users.router";
-import adoptionRouter from "./src/routes/adoption.router";
+import app from "./app.js";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const app = express();
-const PORT = 3000;
+dotenv.config();
 
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/adoptme';
 
-app.use("/api/users", usersRouter);
-app.use("/api/adoptions", adoptionRouter);
-
-app.listen(PORT, () => {
-    console.log("`Servidor corriendo en http://localhost:${PORT}` ")
-});
-
+mongoose.connect(MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => {
+        console.log("✅ Conectado a MongoDB");
+        app.listen(PORT, () => {
+            console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+            console.log(`📘 Documentación Swagger: http://localhost:${PORT}/api/docs`);
+        });
+    })
+    .catch((err) => {
+        console.error("❌ Error al conectar a MongoDB:", err);
+    });
