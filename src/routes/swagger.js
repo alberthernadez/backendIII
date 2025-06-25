@@ -17,9 +17,10 @@ const swaggerDefinition = {
 };
 
 const options = {
-    swaggerDefinition,
+    definition: swaggerDefinition, 
     apis: ['./src/routes/*.js'],
 };
+
 
 const swaggerSpec = swaggerJSDoc(options);
 

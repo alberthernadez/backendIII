@@ -7,10 +7,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/adoptme';
 
-mongoose.connect(MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(MONGO_URL)
     .then(() => {
         console.log("✅ Conectado a MongoDB");
         app.listen(PORT, () => {
@@ -21,3 +18,4 @@ mongoose.connect(MONGO_URL, {
     .catch((err) => {
         console.error("❌ Error al conectar a MongoDB:", err);
     });
+

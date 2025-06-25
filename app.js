@@ -10,8 +10,8 @@ app.use("/api/users", usersRouter);
 app.use("/api/adoptions", adoptionRouter);
 
 if (process.env.NODE_ENV !== 'test') {
-    const { swaggerUi, swaggerSpec } = await import('./src/routes/swagger.js');
-    app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+//    const { swaggerUi, swaggerSpec } = await import('./src/routes/swagger.js');
+//    app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 }
 
 export default app;
